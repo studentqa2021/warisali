@@ -1,5 +1,4 @@
 package com.cucumber.stedef;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -16,8 +15,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class LoginStepdf {
-
+public class LoginStepdf{
 	WebDriver driver;
 	PageFactoryLogin obj;
 	@Given("Open browser")
@@ -25,10 +23,9 @@ public class LoginStepdf {
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
 	}
-
 	@And("go to Application URL")
-	public void getURL() throws Exception {
-		driver.get(BaseConfig.getData("URL"));// any website
+	public void getURL() throws Exception{
+		driver.get(BaseConfig.getData("URL"));
 		driver.manage().window().maximize();
 	}
 
