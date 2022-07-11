@@ -1,11 +1,9 @@
 @Smoke
 Feature: Login function test
- 
 
-@tc001_to_tc005
-@positive
-Scenario: As an Orbis user, can do successfull login with valid credential
-    Given Open browser
+  @tc002_to_tc003 @prositive
+  Scenario: As an orbis user,do successfull login with valid credenttial
+    Given Open Browser
     And go to Application URL
     When put valid user name
     And put valid password

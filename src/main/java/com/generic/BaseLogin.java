@@ -1,53 +1,74 @@
 package com.generic;
 
+import java.time.Duration;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseLogin {
 	
-		public static void getLogin() throws Exception {
-			
-			//System.setProperty("webdriver.chrome.driver", "/Users/waris/Downloads/chromedriver");
-			//WebDriver driver= new ChromeDriver();
+	 static Logger log= Logger.getLogger(BaseLogin.class.getName());
+		public static void getlogin(){//first i need to create a method 
 		
-		
-			//System.setProperty("webdriver.chrome.driver", "/Users/waris/Downloads/chromedriver");
-			
-			WebDriverManager.chromedriver().setup();//THIS LINE AND System.setProperty IS SAME WORK
-			
-			WebDriver driver = new ChromeDriver();
-			
-			driver.navigate().to("https://demo.guru99.com/test/newtours/");
-			
-			//*[@class='mouseOut']//a ==> print all 4 text
-			
-			List<WebElement> topMenuText = driver.findElements(By.xpath("//*[@class='dropdown']/a"));//9
-			
-			//1/ print all items text ==> this ia the  orloop
-			//for(int i=0;i<topMenuText.size();i++) //100 good
-			
-			//2/System.out.println(topMenuText.get(i).getText());
-			//this is the java 8 foreach loop with lambda expression == more faster(lamda is a method)
-			topMenuText.forEach(velue -> System.out.println(velue.getText()));//<== IT QA
-			
-			//3/this is java 8 stream API with peek() method.not practic  yeat
-			//topMenuText.stream().peek(velue-> System.out.println(velue.getText()));
-			
-			
-			//1/any specific object clack(example=i want to click namber 4 object 
-			//i have weight topMenuText than dod than get  select namber of index(3) thn dod click  )
-			//topMenuText.get(3).click();
-			
-			
-			driver.quit();//this is for page quit
-	
-		}
+		WebDriverManager.chromedriver().setup(); //(2) this is code for open a browser
+	    WebDriver Driver = new ChromeDriver();//(3)
+	    Driver.get("http://automationpractice.com/index.php");//(4)this line also  will go my application
+	    Driver.navigate().to("http://automationpractice.com/index.php");;//(4) this line will go my application
+	    
+		 //this 3 waiting code i have write only one time and use after the URL code.
+//	    Driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));//(9)HTML dome page is loaded or not loaded,
+//	    Driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(10));//(9)f anything asynchronous problem it is wait.
+//		Driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));//(9) UI Element page is loaded or not loaded..
+	//	
 
+		Driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));//(9) UI Element page is loaded or not loaded..
+		Driver.manage().window().maximize();//(5)
+		
+		WebElement signInButton= Driver.findElement(By.xpath("//*[@class='login']"));//(6)
+		((JavascriptExecutor)Driver).executeScript("arguments[0].style.border='3px solid red ",signInButton);
+		WebDriverWait waite =new WebDriverWait(Driver,Duration.ofSeconds(30));
+		waite.until(ExpectedConditions.elementToBeClickable(signInButton));
+		signInButton.click();//(7)
+		log.info("this login page");
+		//Thread.sleep(3000);// slow down for 3 sec
+		
+		WebElement email = Driver.findElement(By.xpath("//*[@id='email']"));//(7)
+		((JavascriptExecutor)Driver).executeScript("arguments[0].style.border='3px solid ",email);
+		waite.until(ExpectedConditions.elementToBeClickable(email));
+		email.sendKeys("sarowerny@gmail.com");//prob
+		log.info("this is email");
+		
+		WebElement password = Driver.findElement(By.xpath("//*[@name='passwd']"));//(7)/prob
+		((JavascriptExecutor)Driver).executeScript("arguments[0].style.border='3px solid ",password);
+		waite.until(ExpectedConditions.elementToBeClickable(password));
+		password.sendKeys("student");// crime
+		log.info("this is password");
+		
+		WebElement signInBtn= Driver.findElement(By.xpath("//*[@id='SubmitLogin']"));//(7)prob
+		((JavascriptExecutor)Driver).executeScript("arguments[0].style.border='3px solid ",signInBtn);
+		waite.until(ExpectedConditions.elementToBeClickable(signInBtn));
+		signInBtn.click();
+		log.info("this is signInBtn");
+		
+		Driver.quit();//(8)this code for windows close.	
+		
+		
+		}
+	public static void main(String[] args) { // here i create a main method for call other method.
+		BaseLogin.getlogin();
+
+
+	    }
+}
 		
 			//driver.get(BaseConfig.getData("URL"));
 		
@@ -68,8 +89,4 @@ public class BaseLogin {
 		  //driver.quit();
 			
 			
-		
-public static void main(String[] args) throws Exception {
-	getLogin();
-}
-}
+	

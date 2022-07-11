@@ -18,14 +18,14 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class LoginStepdf{
 	WebDriver driver;
 	PageFactoryLogin obj;
-	@Given("Open browser")
+	@Given("Open Browser")
 	public void getBrowser() {
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
 	}
 	@And("go to Application URL")
 	public void getURL() throws Exception{
-		driver.get(BaseConfig.getData("URL"));
+		driver.get(BaseConfig.getValue("URL"));
 		driver.manage().window().maximize();
 	}
 
@@ -33,12 +33,12 @@ public class LoginStepdf{
 	public void getUsername() throws Exception {
 		 obj=new PageFactoryLogin (driver);
 		Highlighter.getColor(obj.getUser(), driver, "red");
-		obj.getUser().sendKeys(BaseConfig.getData("user"));
+		obj.getUser().sendKeys(BaseConfig.getValue("user"));
 	}
 	@And("put valid password")
 	public void getPassword() throws Exception {
 		Highlighter.getColor(obj.getPassword(), driver);
-		obj.getPassword().sendKeys(BaseConfig.getData("password"));
+		obj.getPassword().sendKeys(BaseConfig.getValue("password"));
 		
 	}
 	@And("click signin button")

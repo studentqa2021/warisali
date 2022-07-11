@@ -11,20 +11,11 @@ import io.cucumber.testng.CucumberOptions;
 				
 		},
 		
-		features = {"/Users/waris/eclipse-workspace/Selenium-Automation-Framework/src/test/resources/orbisLogin.feature" },//path	
-		glue = { "com.cucumber.stedef" }//stepdef package name		
-
-			
-			
-			)
-
-
-
+		features = {"src/test/resources/orbisLogin.feature"},//path	
+		glue = {"com.cucumber.stedef"}//stepdef package name		
+         )
 
 	public class RunnerFile extends AbstractTestNGCucumberTests {
-		
-		
-		
-
-	}
+	
+}
 
